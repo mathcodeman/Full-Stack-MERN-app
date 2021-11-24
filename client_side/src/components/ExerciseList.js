@@ -1,11 +1,11 @@
 import React from "react";
 import * as ReactBootStrap from "react-bootstrap";
-import { MdDeleteForever } from "react-icons/md"
+import { MdDeleteForever, MdEdit } from "react-icons/md"
 
 
 
 
-function ExerciseList({ exercise, OnDelete }) {
+function ExerciseList({ exercise, OnDelete, OnEdit }) {
     //Render items inside of exercise list that passed in
     const renderItem = (item) => {
         return (
@@ -15,7 +15,7 @@ function ExerciseList({ exercise, OnDelete }) {
                 <td>{item.weight}</td>
                 <td>{item.unit}</td>
                 <td>{item.date}</td>
-                <td>Edit</td>
+                <td><MdEdit onClick={() => OnEdit(item)} style={{ cursor: 'pointer' }} /></td>
                 <td><MdDeleteForever onClick={() => OnDelete(item._id)} style={{ cursor: 'pointer' }} /></td>
             </tr>
         );

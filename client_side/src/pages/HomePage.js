@@ -2,12 +2,13 @@ import React from "react";
 import ExerciseList from "../components/ExerciseList";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 //const exercise = [{ name: "James", reps: 1, weight: "lbs", unit: 2, date: "21-09-21" }, { name: "James", reps: 1, weight: "lbs", unit: 2, date: "21-09-21" }];
 
 
 
-function HomePage() {
+function HomePage({ SetExerciseToEdit }) {
     //This is to control the reaction of the change of exercise list on the page
     const [exercise, setExercise] = useState([]);
 
@@ -17,6 +18,8 @@ function HomePage() {
         const data = await respnse.json()
         setExercise(data); //Re-render the page
     }
+
+    const navigate = useNavigate();
 
 
     //This call just to modify the databse and the table content was the old content
@@ -33,6 +36,13 @@ function HomePage() {
         }
     }
 
+    const OnEdit = (exercise) => {
+        SetExerciseToEdit(exercise)
+        navigate('edit_page')
+    }
+
+
+
     useEffect(() => {
         loadExercise();
     })
@@ -41,7 +51,7 @@ function HomePage() {
     return (
         <>
             <h2>Welcome to the HomePage</h2>
-            <ExerciseList exercise={exercise} OnDelete={deleteExercise}></ExerciseList>
+            <ExerciseList exercise={exercise} OnDelete={deleteExercise} OnEdit={OnEdit}></ExerciseList>
             <Link to="/create_page">Add new exercise</Link>
         </>
     )
