@@ -32,13 +32,13 @@ const getExercise = async () => {
     return file
 }
 
-const updateExercise = async (_id, filter) => {
-    const result = await exercise.updateMany({ id: _id }, filter)
-    return result.nModified
+const updateExercise = async (_id, name, reps, weight, unit, date) => {
+    const result = await exercise.findOneAndUpdate({ _id: _id }, { name: name, reps: reps, weight: weight, unit: unit, date: date })
+    return result
 }
 
 const deleteExercise = async (_id) => {
-    const result = await exercise.deleteMany({ id: _id })
+    const result = await exercise.deleteOne({ _id: _id })
     return result.deletedCount
 }
 export { createExercise, getExercise, updateExercise, deleteExercise }

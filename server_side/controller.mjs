@@ -14,7 +14,7 @@ app.post('/exercises', (req, res) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(400).json({ Error: "Request Failed!!" })
+            res.status(500).json({ Error: "Request Failed!!" })
         })
 })
 
@@ -26,20 +26,19 @@ app.get('/exercises', (req, res) => {
         })
         .catch(error => {
             console.log(error)
-            res.status(404).json({ Error: "Request Failed!!" })
+            res.status(500).json({ Error: "Request Failed!!" })
         })
 })
 
 app.put('/exercises/:id', (req, res) => {
-    const filter = { "name": req.body.name, "reps": req.body.reps, "weight": req.body.weight, "unit": req.body.weight, "date": req.body.date }
-    exercise.updateExercise(req.params.id, filter)
+
+    exercise.updateExercise(req.params.id, req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date)
         .then(updateCount => {
-            console.log(updateCount)
             res.status(200).json({ Updated: updateCount })
         })
         .catch(error => {
             console.log(error)
-            res.status(400).json({ Error: "Requested failed!!!" })
+            res.status(500).json({ Error: "Requested Failed!!!" })
         })
 })
 
