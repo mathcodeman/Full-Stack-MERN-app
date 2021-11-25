@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function EditExercise({ exerciseToEdit }) {
     const [Name, setName] = useState(exerciseToEdit.name);
@@ -7,6 +8,9 @@ function EditExercise({ exerciseToEdit }) {
     const [weight, setWeight] = useState(exerciseToEdit.weight);
     const [unit, setUnit] = useState(exerciseToEdit.unit);
     const [date, setDate] = useState(exerciseToEdit.date);
+
+    const navigate = useNavigate();
+
 
     const editExercise = async () => {
         const result = await fetch(`/exercises/${exerciseToEdit._id}`, {
@@ -24,6 +28,7 @@ function EditExercise({ exerciseToEdit }) {
         else {
             alert("Failed to edit!!")
         }
+        navigate('/')
 
 
     }
@@ -56,7 +61,7 @@ function EditExercise({ exerciseToEdit }) {
                         <Form.Control type="date" value={date} onChange={e => setDate(e.target.value)} />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit" onClick={editExercise}>
+                    <Button onClick={editExercise}>
                         Edit
                     </Button>
                 </Form>

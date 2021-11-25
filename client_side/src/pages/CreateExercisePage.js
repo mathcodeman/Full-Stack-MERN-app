@@ -59,7 +59,7 @@ function CreateExercise() {
                         <Form.Control type="date" placeholder="Date" value={date} onChange={e => setDate(e.target.value)} />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit" onClick={addExercise}>
+                    <Button onClick={addExercise}>
                         Add
                     </Button>
                 </Form>
