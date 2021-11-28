@@ -39,7 +39,7 @@ const updateExercise = async (_id, name, reps, weight, unit, date) => {
 
 const deleteExercise = async (_id) => {
     const result = await exercise.deleteOne({ _id: _id })
-    return result.deletedCount
+    return result
 }
 export { createExercise, getExercise, updateExercise, deleteExercise }
 

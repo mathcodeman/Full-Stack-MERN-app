@@ -12,11 +12,15 @@ function HomePage({ SetExerciseToEdit }) {
     //This is to control the reaction of the change of exercise list on the page
     const [exercise, setExercise] = useState([]);
 
+
+
+
     //This is to fetch the backend API call
     const loadExercise = async () => {
         const respnse = await fetch('/exercises', { method: 'GET' })
         const data = await respnse.json()
         setExercise(data); //Re-render the page
+
     }
 
     const navigate = useNavigate();
@@ -26,13 +30,16 @@ function HomePage({ SetExerciseToEdit }) {
     //Called by the loadExercise function
     //SetExercise to re-render the table
     const deleteExercise = async (_id) => {
-        const response = await fetch(`/exercises/${_id}`, { method: 'DELETE' })
-        if (response.status === 204) {
+        const result = await fetch(`/exercises/${_id}`, { method: 'DELETE' })
+
+        if (result.status === 204) {
+
             const newExercise = exercise.filter(item => item._id !== _id);
             setExercise(newExercise)
+
         }
         else {
-            console.error(`Failed to delete the id=${_id} item, state code = ${response.status}`)
+            console.error(`Failed to delete the id=${_id} item, state code = ${result.status}`)
         }
     }
 
@@ -45,7 +52,7 @@ function HomePage({ SetExerciseToEdit }) {
 
     useEffect(() => {
         loadExercise();
-    })
+    }, [])
 
 
     return (

@@ -22,7 +22,7 @@ app.get('/exercises', (req, res) => {
     exercise.getExercise()
         .then(result => {
             console.log(result)
-            res.status(201).json(result)
+            res.status(200).json(result)
         })
         .catch(error => {
             console.log(error)
@@ -33,8 +33,8 @@ app.get('/exercises', (req, res) => {
 app.put('/exercises/:id', (req, res) => {
 
     exercise.updateExercise(req.params.id, req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date)
-        .then(updateCount => {
-            res.status(200).json({ Updated: updateCount })
+        .then(update => {
+            res.status(200).json({ Updated: update })
         })
         .catch(error => {
             console.log(error)
@@ -46,7 +46,7 @@ app.delete('/exercises/:id', (req, res) => {
     exercise.deleteExercise(req.params.id)
         .then(deleteCount => {
             console.log(deleteCount)
-            res.status(204)
+            res.status(204).json({ delete: deleteCount })
         })
         .catch(error => {
             console.log(error)
